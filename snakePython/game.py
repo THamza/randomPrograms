@@ -32,6 +32,8 @@ numberOfPlayers = 2
 #TODO:BEAUTIFY
 snake1 = Snake(100,100,100,100,90,100,80,100)
 snake2 = Snake(100,300,100,300,90,300,80,300)
+print(snake1.snakeBody)
+print(snake2.snakeBody)
 snakes = [snake1,snake2]
 
 
@@ -75,13 +77,13 @@ while True:
             sys.exit()
         elif event.type == pygame.KEYDOWN:
             playerIndex = Controls.associateButtonToPlayer(event.key)
-            if event.key == Snakes.snakesControls[playerIndex][1]: #Right
+            if event.key == Controls.snakesControls[playerIndex][1]: #Right
                 snakes[playerIndex].changeto = 'RIGHT'
-            if event.key == Snakes.snakesControls[playerIndex][3]: #K_LEFT
+            if event.key == Controls.snakesControls[playerIndex][3]: #K_LEFT
                 snakes[playerIndex].changeto = 'LEFT'
-            if event.key == Snakes.snakesControls[playerIndex][0]: #K_UP
+            if event.key == Controls.snakesControls[playerIndex][0]: #K_UP
                 snakes[playerIndex].changeto = 'UP'
-            if event.key == Snakes.snakesControls[playerIndex][2]: #K_DOWN
+            if event.key == Controls.snakesControls[playerIndex][2]: #K_DOWN
                 snakes[playerIndex].changeto = 'DOWN'
             if event.key == pygame.K_ESCAPE: #K_ESCAPE
                 snakes[playerIndex].pygame.event.post(pygame.event.Event(pygame.QUIT))
@@ -142,6 +144,8 @@ while True:
         # Self hit
         for block in snake.snakeBody[1:]:
             if snake.snakePos[0] == block[0] and snake.snakePos[1] == block[1]:
+                print(snake1.snakeBody)
+                print(snake2.snakeBody)
                 gameOver()
 
     #common stuff
