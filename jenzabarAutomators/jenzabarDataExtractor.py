@@ -9,8 +9,8 @@ from pprint import pprint
 
 
 baseURL="https://my.aui.ma"
-AUIID = "67745"
-Password = "A1e90c459b797;;"
+AUIID ="30614"
+Password = "Fw4e651dds3"
 gradebookURLs = []
 
 driver = webdriver.Chrome()
@@ -67,7 +67,7 @@ for items in containers:
 
         table = tableDiv.find_element_by_xpath(".//table[@class='amcGenericTable']")
 
-        rows = table.find_elements_by_xpath('.//tr[@class = "alt"|@class = ""]')
+        rows = table.find_elements_by_xpath('.//tr[@class = "alt"|@class = "" |@class]')
 
         # print("\nNumber of columns: ",len(rows), "(Using 10)" )
 
@@ -77,7 +77,8 @@ for items in containers:
             for k in range(0,len(cells)):
 
                     if(cells[k].text[0:2] == "--"):
-                        gradebookURLs.append(cells[k].find_element_by_tag_name('a').get_attribute('href'))
+                        if(cells[k].find_elements_by_tag_name('a') != 0):
+                            gradebookURLs.append(cells[k].find_element_by_tag_name('a').get_attribute('href'))
                         # print(cell.find_element_by_tag_name('a').get_attribute('href') , "\n")
                         # print(cells[k-2].text, " Added: ", cells[k].find_element_by_tag_name('a').get_attribute('href'))
 
