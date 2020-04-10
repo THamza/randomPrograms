@@ -10,7 +10,7 @@ from pprint import pprint
 
 baseURL="https://my.aui.ma"
 AUIID ="30614"
-Password = "Fw4e651dds3"
+Password = "AuiI2020"
 gradebookURLs = []
 
 driver = webdriver.Chrome()
@@ -42,7 +42,8 @@ driver.get("https://my.aui.ma/ICS/LMS")
 
 
 
-print("Requesting Past Courses...",end="")
+print("Requesting Past Courses...")
+
 period = driver.find_element_by_name("pg0$V$ddShowMenu")
 for option in period.find_elements_by_tag_name('option'):
     if option.get_attribute('value') == "0":
@@ -51,7 +52,7 @@ for option in period.find_elements_by_tag_name('option'):
         break
 
 
-print("Looking for tables...", end="")
+print("Looking for tables...")
 containers = driver.find_elements_by_xpath('.//div[@class="pSection"]')
 if(containers != None):
     print("Found: ", len(containers) , " containers")
@@ -83,7 +84,7 @@ for items in containers:
                         # print(cells[k-2].text, " Added: ", cells[k].find_element_by_tag_name('a').get_attribute('href'))
 
 
-
+console.log(gradebookURL)
 for gradebookURL in gradebookURLs:
     driver.get(gradebookURL)
     viewFullGradebookBtn = driver.find_element_by_id('pg0_V_FullGradebookLink')
