@@ -21,12 +21,17 @@ for i in range(0,epochs):
 		print("    X"+str(di)+":")
 		print("        Predict:")
 		weightedSum = 0
-
+		print("            Weighted Sum: ", end="")
 		for k in range(0, nParam):
+			if(k==0):
+				print(d[k], " * ", weights[k], end="")
+			else
+				print(" + ", d[k], " * ", weights[k], end="")
+
 			weightedSum += d[k]*weights[k]
 
 		prediction =  sign(weightedSum + w0)
-		
+		print(" = ", weightedSum)
 		print("            y(hat)" + str(di) + " = sign(" + str(weightedSum  + w0) + ") = " + str(prediction))
 		
 		print("        Update:")
