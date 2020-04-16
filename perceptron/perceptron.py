@@ -25,13 +25,14 @@ for i in range(0,epochs):
 		for k in range(0, nParam):
 			if(k==0):
 				print(d[k], " * ", weights[k], end="")
-			else
+			else:
 				print(" + ", d[k], " * ", weights[k], end="")
 
 			weightedSum += d[k]*weights[k]
 
 		prediction =  sign(weightedSum + w0)
-		print(" = ", weightedSum)
+		print(" = {:.2f}".format(weightedSum))
+
 		print("            y(hat)" + str(di) + " = sign(" + str(weightedSum  + w0) + ") = " + str(prediction))
 		
 		print("        Update:")
@@ -39,12 +40,12 @@ for i in range(0,epochs):
 			print("            w" + str(wi+1) + " = " + str(weights[wi]) + " * " +str(lr) + " * ( " + str(d[3]) +" - " + str(prediction) + " ) * " + str(d[wi]) +" = " + str(weights[wi] + 0.1 * (d[3] - prediction) * d[wi]))
 			weights[wi] = weights[wi] + 0.1 * (d[3] - prediction) * d[wi]
 		
-		print("            w0 = " + str(w0) + " * " +str(lr) + " * ( " + str(d[3]) +" - " + str(prediction) + " ) * 1 = " + str(w0 + lr * (d[3] - prediction) + 1))
+		print("            w0 = " + str(w0) + " * " +str(lr) + " * ( " + str(d[3]) +" - " + str(prediction) + " ) * 1 = {:.2f}".format(w0 + lr * (d[3] - prediction) + 1))
 		w0= w0 + lr * (d[3] - prediction) + 1
+		w0 = float("{:.2f}".format(w0))
 
 		print("                        _________________________")
 		print("")
-
 
 
 
