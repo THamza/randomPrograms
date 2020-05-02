@@ -13,30 +13,32 @@ func init(s):
 	_scale_orgranism(self)
 	pass
 func estimate_best_velocity():
-	var esVel = find_closest_food()
-	return esVel
-	
+	var closest = find_closest_food()
+	var direction_to_closesest = Vector2(closest.global_position.x - global_position.x, closest.global_position.y - global_position.y)
+	print(direction_to_closesest)
+	return direction_to_closesest
+
+#Should be replaced to calculate the distance based on radius
 func find_closest_food():
 	var food_container = get_tree().get_root().get_node("main/food_container")
-	print(food_container.get_children().size())
-	# assume the first spawn node is closest
-	#var nearest_food_point = food_points[0]
 	
-	# look through spawn nodes to see if any are closer
-#	for food_point in food_points:
-#			if food_point.global_position.distance_to(global_position) < nearest_food_point.global_position.distance_to(global_position):
-#				nearest_food_point = food_point
-#	return nearest_food_point
+	var food_points = food_container.get_children()
+	var nearest_food_point = food_points[0]
+	
+	for food_point in food_points:
+			if food_point.global_position.distance_to(global_position) < nearest_food_point.global_position.distance_to(global_position):
+				nearest_food_point = food_point
+	return nearest_food_point
 	
 		
 func _physics_process(delta):
 	velocity = estimate_best_velocity()
 	
-#	velocity = velocity.normalized() * points
-#	var collision = move_and_collide(velocity * delta * 1000)
+	velocity = velocity.normalized() * points
+	var collision = move_and_collide(velocity * delta * 1000)
 		
-#	if collision and is_correct_name(collision.collider.name):
-#		collision.collider.queue_free() 
+	if collision and is_correct_name(collision.collider.name):
+		collision.collider.queue_free() 
 
 func is_correct_name(name):
 	if "@food@" in name or name=="food":
