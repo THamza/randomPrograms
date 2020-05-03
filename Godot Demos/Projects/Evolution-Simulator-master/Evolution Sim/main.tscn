@@ -47,7 +47,7 @@ scale = Vector2( 2, 1 )
 shape = SubResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="walls/StaticBody2D"]
-position = Vector2( -2305, -1290 )
+position = Vector2( -2304, -1275 )
 scale = Vector2( 2, 1 )
 shape = SubResource( 4 )
 
@@ -58,13 +58,37 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="generation_label" type="Label" parent="HUD"]
+[node name="count_generation_label" type="Label" parent="HUD"]
 margin_left = 12.0
 margin_top = 10.0
 margin_right = 103.0
 margin_bottom = 24.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Generation : 0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="count_organism_label" type="Label" parent="HUD"]
+margin_left = 12.0
+margin_top = 33.0
+margin_right = 103.0
+margin_bottom = 47.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Organisms: 0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="order_organism_label" type="RichTextLabel" parent="HUD"]
+anchor_left = 22.8
+anchor_top = 0.5
+anchor_right = 25.35
+anchor_bottom = 5.55
+margin_left = -196.0
+margin_top = 76.0
+margin_right = -258.0
+margin_bottom = -86.0
 __meta__ = {
 "_edit_use_anchors_": false
 }

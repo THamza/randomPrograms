@@ -3,9 +3,13 @@ onready var organism = preload("res://organism.tscn")
 onready var food = preload("res://food.tscn")
 onready var organism_container = get_node("organsism_container")
 onready var food_container = get_node("food_container")
-onready var generation_label = get_node("HUD/generation_label")
+onready var count_generation_label = get_node("HUD/count_generation_label")
+onready var count_organism_label = get_node("HUD/count_organism_label")
+onready var order_organism_label = get_node("HUD/order_organism_label")
 
-var generation = 0
+var count_generation = 0
+var count_organism = 0
+var HUD_text = ""
 # Mutation rate as a percent
 const MUTATION_RATE = 10
 
@@ -24,8 +28,10 @@ func _ready():
 	#add_child(food_container)
 	#add_child(organism_container)
 	
-	initial_population(1)
+	initial_population(5)
+	count_organism = 5
 	spawn_food(30)
+	update_HUD()
 	pass
 
 #spawn random organisms for inital population
@@ -56,7 +62,7 @@ func spawn_food(num):
 #	pass
 
 func reproduction():
-	update_generation()
+	update_HUD()
 	new_gen_organisms = []
 	var num_curr_organisms = organism_container.get_child_count()
 	
@@ -68,6 +74,10 @@ func reproduction():
 	for i in new_gen_organisms:
 		print("new gen gene: " + str(i))
 	spawn_new_generation()
+	
+func update_HUD():
+	update_count_generation()
+	update_count_organisms()
 	
 func kill_curr_organisms():
 	for organism in organism_container.get_children():
@@ -101,9 +111,13 @@ func total_fitness():
 	return sum
 		
 # Updates variable and HUD lable by 1
-func update_generation():
-	generation += 1
-	generation_label.set_text("Generation : " + str(generation))
+func update_count_generation():
+	count_generation += 1
+	count_generation_label.set_text("Generation : " + str(count_generation))
+
+# Updates variable and HUD lable by 1
+func update_count_organisms():
+	count_organism_label.set_text("Organisms : " + str(count_organism))
 
 # Randomly mutates organism 
 func mutation():
@@ -117,6 +131,5 @@ func mutation():
 
 func _process(delta):
 		if food_container.get_child_count() == 0:
-#			new 
-			reproduction()
+		#	reproduction()
 			spawn_food(30)

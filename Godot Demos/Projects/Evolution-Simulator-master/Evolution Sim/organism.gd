@@ -2,43 +2,59 @@
 extends KinematicBody2D
 var colshape
 var points = 1
-var velocity
+var direction
+var velocity = 50
+
+var color
 
 var NeuralNetwork = preload("./lib/Neural Network/Brain.gd")
 var neural_network
 
 func init(s):
-	velocity = 626.668 - (322.6793 * points) + (39.93924 * (pow(points,2)))
-
+	randomize()
 	_scale_orgranism(self)
+	
+	
+	var sprite = get_node("organismSprite")
+	color = Color(rand_range(0,255)/255,rand_range(0,255)/255,rand_range(0,255)/255)
+	sprite.modulate = color
 	pass
+
 func estimate_best_velocity():
 	var closest = find_closest_food()
-	var direction_to_closesest = Vector2(closest.global_position.x - global_position.x, closest.global_position.y - global_position.y)
-	print(direction_to_closesest)
-	return direction_to_closesest
+	
+	
+	if(closest):
+		var direction_to_closesest = Vector2(closest.global_position.x - global_position.x, closest.global_position.y - global_position.y)
+		return direction_to_closesest
+	else:
+		return Vector2(0,0)
+	
 
 #Should be replaced to calculate the distance based on radius
 func find_closest_food():
 	var food_container = get_tree().get_root().get_node("main/food_container")
 	
 	var food_points = food_container.get_children()
-	var nearest_food_point = food_points[0]
-	
-	for food_point in food_points:
-			if food_point.global_position.distance_to(global_position) < nearest_food_point.global_position.distance_to(global_position):
-				nearest_food_point = food_point
-	return nearest_food_point
+	if food_points:
+		var nearest_food_point = food_points[0]
+		
+		for food_point in food_points:
+				if food_point.global_position.distance_to(global_position) < nearest_food_point.global_position.distance_to(global_position):
+					nearest_food_point = food_point
+		return nearest_food_point
+	else:
+		return null 
 	
 		
 func _physics_process(delta):
-	velocity = estimate_best_velocity()
+	direction = estimate_best_velocity()
 	
-	velocity = velocity.normalized() * points
-	var collision = move_and_collide(velocity * delta * 1000)
+	direction = direction.normalized() * points
+	var collision = move_and_collide(direction * velocity * delta )
 		
 	if collision and is_correct_name(collision.collider.name):
-		collision.collider.queue_free() 
+		eat(collision.collider)
 
 func is_correct_name(name):
 	if "@food@" in name or name=="food":
@@ -46,11 +62,14 @@ func is_correct_name(name):
 	else:
 		return false
 	
-
+func eat(food):
+	points += 1;
+	food.queue_free()
 
 func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
+	
 	
 	pass
 	
@@ -96,6 +115,7 @@ func multiplyVector2(vector, number):
 
 
 
+#Genetic Algo
 
 
 
