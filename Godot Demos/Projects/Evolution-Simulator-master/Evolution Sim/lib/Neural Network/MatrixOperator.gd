@@ -7,6 +7,8 @@ static func subtract(a: Matrix, b: Matrix) -> Matrix:
 	var result = Matrix.new(a.rows, a.cols)
 	for i in range(a.rows):
 		for j in range(a.cols):
+			print(a.data[i][j])
+			print(b.data[i][j])
 			result.data[i][j] = a.data[i][j] - b.data[i][j]
 	return result
 

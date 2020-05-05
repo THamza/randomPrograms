@@ -42,7 +42,7 @@ position = Vector2( 0, -10 )
 shape = SubResource( 2 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="walls/StaticBody2D"]
-position = Vector2( 2730, -1290 )
+position = Vector2( 2732, -1345 )
 scale = Vector2( 2, 1 )
 shape = SubResource( 3 )
 
@@ -76,6 +76,28 @@ margin_right = 103.0
 margin_bottom = 47.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Organisms: 0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="best_so_far_organism_label" type="Label" parent="HUD"]
+margin_left = 914.0
+margin_top = 34.0
+margin_right = 1005.0
+margin_bottom = 48.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Best ever: 0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="best_ever_organism_label" type="Label" parent="HUD"]
+margin_left = 914.0
+margin_top = 15.0
+margin_right = 1005.0
+margin_bottom = 29.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Best so far: 0"
 __meta__ = {
 "_edit_use_anchors_": false
 }

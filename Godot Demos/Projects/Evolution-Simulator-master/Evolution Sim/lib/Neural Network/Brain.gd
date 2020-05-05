@@ -117,6 +117,17 @@ func mutate():
 func duplicate():
 	return get_script().new(self)
 
+func get_parameters():
+	print("weight ih:",weights_ih)
+	print("brain0.0:",[[weights_ih, bias_h], [weights_ho, bias_o]])
+	return [[weights_ih, bias_h], [weights_ho, bias_o]]
+	
+func set_parameters(parameters): #To be modified when this handles more layers
+	weights_ih = parameters[0][0]
+	bias_h = parameters[0][1]
+	weights_ho = parameters[1][0]
+	bias_o = parameters[1][1]
+
 func mutation_func(val):
 	if randf() < mutation_rate:
 		return val + rand_range(-0.1, 0.1)

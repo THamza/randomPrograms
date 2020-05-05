@@ -3,9 +3,13 @@ extends KinematicBody2D
 var colshape
 var points = 1
 var direction
-var velocity = 50
+var velocity = 200
 var last_checked_position
 var color
+var evolution_rate = 0.01
+
+var Matrix = preload("./lib/Neural Network/Matrix.gd")
+var MatrixOperator = preload("./lib/Neural Network/MatrixOperator.gd")
 
 var NeuralNetwork = preload("./lib/Neural Network/Brain.gd")
 var neural_network
@@ -13,7 +17,7 @@ var neural_network
 func init(s):
 	randomize()
 	_scale_orgranism(self)
-	neural_network = NeuralNetwork.new(2, 4, 2)
+	neural_network = NeuralNetwork.new(3, 4, 2)
 	
 	var sprite = get_node("organismSprite")
 	color = Color(rand_range(0,255)/255,rand_range(0,255)/255,rand_range(0,255)/255)
@@ -24,12 +28,16 @@ func estimate_best_velocity():
 	var closest = find_closest_food()
 	
 	if(closest):
-		var direction_to_closesest = Vector2(closest.global_position.x - global_position.x, closest.global_position.y - global_position.y)
-		
-		return neural_network.predict([direction_to_closesest.x,direction_to_closesest.y])
+		#var direction_to_closesest = Vector2(closest.global_position.x - global_position.x, closest.global_position.y - global_position.y)
+
+		return neural_network.predict([global_position.x, global_position.y, calculate_distance(closest.global_position, global_position)])
 	else:
 		return Vector2(0,0)
 	
+			
+func calculate_distance(A,B):
+	return sqrt(pow(B.x - A.x,2) + pow(B.y - A.y,2))
+
 
 #Should be replaced to calculate the distance based on radius
 func find_closest_food():
@@ -97,7 +105,7 @@ func _scale_orgranism(body):
 func get_gene():
 	return points
 	pass
-func calculate_fitness():
+func get_fitness():
 	return points
 	pass
 	
@@ -108,13 +116,43 @@ func multiplyVector2(vector, number):
 	pass
 
 
-
+func get_organism_brain():
+	return neural_network.get_parameters()
 
 #Genetic Algo
 
+func set_organism_brain(params):
+	neural_network.set_parameters(params) #TODO: DEFINE
 
-
-
+func get_evolution(brain_parameters):
+	for layer in brain_parameters:
+		var weights = layer[0]
+		var biases = layer[1]
+		
+		var weights_evolution_map 
+		var biases_evolution_map = []
+		
+			
+		for i in range(0,weights.to_array().size()):
+			if(rand_range(0,1) == 0):
+				weights_evolution_map = Matrix.new(weights.rows, weights.cols, evolution_rate)
+			else:
+				weights_evolution_map = Matrix.new(weights.rows, weights.cols, -evolution_rate)
+		
+		
+		for i in range(0,biases.to_array().size()):
+			if(rand_range(0,1) == 0):
+				biases_evolution_map = Matrix.new(biases.rows, biases.cols, evolution_rate)
+			else:
+				biases_evolution_map = Matrix.new(biases.rows, biases.cols, -evolution_rate)
+		
+		MatrixOperator.subtract(weights, weights_evolution_map)
+		MatrixOperator.subtract(biases, biases_evolution_map)
+		
+				
+	return brain_parameters
+	
+	
 
 
 #if Input.is_action_pressed('ui_right'):

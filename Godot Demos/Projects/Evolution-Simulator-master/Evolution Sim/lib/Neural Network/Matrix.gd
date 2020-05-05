@@ -5,22 +5,22 @@ var cols := 0
 var data := []
 
 # CONSTRUCTORS
-func _init(a, b = null):
+func _init(a, b = null, c = null):
 	if a is Array:
 		construct_from_arr(a)
 	elif a is int:
-		construct_from_size(a, b)
+		construct_from_size(a, b, c)
 	else:
 		construct_from_matrix(a)
 
-func construct_from_size(rows, cols):
+func construct_from_size(rows, cols, num):
 	self.rows = rows
 	self.cols = cols
 	
 	for i in range(rows):
 		data.append([])
 		for j in range(cols):
-			data[i].append(0)
+			data[i].append(num)
 
 func construct_from_arr(arr):
 	rows = arr.size()
@@ -104,3 +104,9 @@ func to_array() -> Array:
 # duplicate the matrix
 func duplicate():
 	return get_script().new(self)
+
+func get_cols_num():
+	return cols
+
+func get_rows_num():
+	return rows
