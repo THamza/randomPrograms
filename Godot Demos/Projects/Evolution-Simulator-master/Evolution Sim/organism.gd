@@ -4,7 +4,7 @@ var colshape
 var points = 1
 var direction
 var velocity = 50
-
+var last_checked_position
 var color
 
 var NeuralNetwork = preload("./lib/Neural Network/Brain.gd")
@@ -13,7 +13,7 @@ var neural_network
 func init(s):
 	randomize()
 	_scale_orgranism(self)
-	
+	neural_network = NeuralNetwork.new(2, 4, 2)
 	
 	var sprite = get_node("organismSprite")
 	color = Color(rand_range(0,255)/255,rand_range(0,255)/255,rand_range(0,255)/255)
@@ -23,10 +23,10 @@ func init(s):
 func estimate_best_velocity():
 	var closest = find_closest_food()
 	
-	
 	if(closest):
 		var direction_to_closesest = Vector2(closest.global_position.x - global_position.x, closest.global_position.y - global_position.y)
-		return direction_to_closesest
+		
+		return neural_network.predict([direction_to_closesest.x,direction_to_closesest.y])
 	else:
 		return Vector2(0,0)
 	
@@ -49,9 +49,8 @@ func find_closest_food():
 		
 func _physics_process(delta):
 	direction = estimate_best_velocity()
-	
-	direction = direction.normalized() * points
-	var collision = move_and_collide(direction * velocity * delta )
+	direction = Vector2(direction[0],direction[1])
+	var collision = move_and_collide(direction * velocity  * points * delta )
 		
 	if collision and is_correct_name(collision.collider.name):
 		eat(collision.collider)
@@ -70,6 +69,7 @@ func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
 	
+	last_checked_position = global_position
 	
 	pass
 	
@@ -92,13 +92,8 @@ func _scale_orgranism(body):
 	sprite.set_scale(scale_sprite)
 	collision_circle.set_scale(scale_collision)
 	pass
-func add_food():
-	points += 0.001
-func get_food():
-	pass
-	return points
-	pass
-	pass
+	
+
 func get_gene():
 	return points
 	pass

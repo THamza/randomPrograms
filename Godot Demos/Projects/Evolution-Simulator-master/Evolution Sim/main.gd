@@ -7,6 +7,7 @@ onready var count_generation_label = get_node("HUD/count_generation_label")
 onready var count_organism_label = get_node("HUD/count_organism_label")
 onready var order_organism_label = get_node("HUD/order_organism_label")
 
+var is_organism_moving_threshold = 0.1
 var count_generation = 0
 var count_organism = 0
 var HUD_text = ""
@@ -128,8 +129,25 @@ func mutation():
 	else:
 		return false
 
-
+func organisms_moving(threshold):
+	for o in organism_container.get_children():
+		var distance = calculate_distance(o.global_position ,o.last_checked_position)
+		print(distance)
+		o.last_checked_position = o.global_position
+		if(distance > threshold):
+			return true
+	print("false")
+	return false
+	
 func _process(delta):
-		if food_container.get_child_count() == 0:
-		#	reproduction()
+		if food_container.get_child_count() == 0 or not organisms_moving(is_organism_moving_threshold):
+			reproduction()
+			for food in food_container.get_children():
+				food.queue_free()
+
 			spawn_food(30)
+			
+			
+			
+func calculate_distance(A,B):
+	return sqrt(pow(B.x - A.x,2) + pow(B.y - A.y,2))
