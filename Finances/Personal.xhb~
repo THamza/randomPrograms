@@ -6,6 +6,8 @@
 <account key="2" pos="2" type="3" curr="1" name="Ayda" initial="8200" minimum="0"/>
 <pay key="1" name="Store"/>
 <pay key="2" name="Taxis"/>
+<pay key="3" name="Tacos Cool Azrou"/>
+<pay key="4" name="Apparatus Provider"/>
 <cat key="1" name="Alimony"/>
 <cat key="2" name="Automobile"/>
 <cat key="5" parent="2" flags="1" name="Maintenance"/>
@@ -132,7 +134,12 @@
 <cat key="123" parent="120" flags="3" name="Employer Matching"/>
 <cat key="122" parent="120" flags="3" name="Commission"/>
 <cat key="121" parent="120" flags="3" name="Bonus"/>
+<cat key="127" name="Apparatus"/>
+<ope date="737688" amount="0" account="2" paymode="3" st="1" payee="1" category="21" wording="Internet" tags="Internet"/>
+<ope date="737688" amount="-70" account="2" paymode="3" payee="3" category="42" wording="Putin mix + panini nugget + fries" tags="Food Outside"/>
+<ope date="737689" amount="-30" account="2" st="1" payee="1" category="42" tags="Snack"/>
 <ope date="737689" amount="-0.5" account="1" paymode="3" st="1" payee="1" category="54" info="Briquet" tags="Tools briquet"/>
 <ope date="737689" amount="-56" account="1" paymode="3" payee="2" category="99" info="Taxis roud trip ifrane"/>
 <ope date="737689" amount="-82" account="1" paymode="3" category="42" info="Fuits" tags="Fuits"/>
+<ope date="737689" amount="-233" account="1" paymode="3" st="1" payee="4" category="127" tags="Apparatus"/>
 </homebank>
