@@ -1,0 +1,116 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://main.gd" type="Script" id=1]
+[ext_resource path="res://background.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 1500, 1000 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 1500, 977.119 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 1000, 600 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 1000.84, 600 )
+
+[node name="main" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="background" type="Sprite" parent="."]
+position = Vector2( 514.724, 301.088 )
+scale = Vector2( 0.655245, 0.928163 )
+texture = ExtResource( 2 )
+
+[node name="organsism_container" type="Node2D" parent="."]
+
+[node name="food_container" type="Node2D" parent="."]
+
+[node name="walls" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="walls"]
+position = Vector2( 300, 1590 )
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="walls/StaticBody2D"]
+position = Vector2( 0, -2582.2 )
+scale = Vector2( 1, 0.991824 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="walls/StaticBody2D"]
+position = Vector2( 0, -10 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="walls/StaticBody2D"]
+position = Vector2( 2732, -1345 )
+scale = Vector2( 2, 1 )
+shape = SubResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="walls/StaticBody2D"]
+position = Vector2( -2304, -1275 )
+scale = Vector2( 2, 1 )
+shape = SubResource( 4 )
+
+[node name="HUD" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="count_generation_label" type="Label" parent="HUD"]
+margin_left = 12.0
+margin_top = 10.0
+margin_right = 103.0
+margin_bottom = 24.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Generation : 0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="count_organism_label" type="Label" parent="HUD"]
+margin_left = 12.0
+margin_top = 33.0
+margin_right = 103.0
+margin_bottom = 47.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Organisms: 0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="best_so_far_organism_label" type="Label" parent="HUD"]
+margin_left = 914.0
+margin_top = 34.0
+margin_right = 1005.0
+margin_bottom = 48.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Best ever: 0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="best_ever_organism_label" type="Label" parent="HUD"]
+margin_left = 914.0
+margin_top = 15.0
+margin_right = 1005.0
+margin_bottom = 29.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Best so far: 0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="order_organism_label" type="RichTextLabel" parent="HUD"]
+anchor_left = 22.8
+anchor_top = 0.5
+anchor_right = 25.35
+anchor_bottom = 5.55
+margin_left = -196.0
+margin_top = 76.0
+margin_right = -258.0
+margin_bottom = -86.0
+__meta__ = {
+"_edit_use_anchors_": false
+}

@@ -1,0 +1,25 @@
+Fox ================================
+
+(sniff_fox(progn(advance)(turn_left)(turn_left))(advance))
+
+(sniff_fox(advance)(advance))
+
+(sniff_fox(advance)(advance))
+
+(sniff_fox(advance)(advance))
+
+
+Rabbit: =============================
+
+(progn(progn(turn_left)(progn(advance)))(advance))
+
+(progn(progn(turn_left)(advance))(advance))
+
+(progn(progn(turn_left)(advance))(progn(advance)))
+
+(progn(turn_left)(turn_right))
+
+(progn(progn(turn_right)(turn_left))(turn_right))
+
+(progn(turn_left)(progn(advance)))
+

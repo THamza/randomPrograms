@@ -1,0 +1,31 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[  ]
+_global_script_class_icons={
+
+}
+
+[application]
+
+config/name="TestGame"
+run/main_scene="res://levels/00/level00.tscn"
+config/icon="res://icon.png"
+
+[layer_names]
+
+2d_render/layer_1="water"
+2d_render/layer_2="lands"
+2d_render/layer_3="food"
+2d_render/layer_4="creatures"
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"
