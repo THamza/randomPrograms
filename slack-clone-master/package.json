@@ -1,0 +1,30 @@
+{
+  "name": "soen341-project",
+  "version": "1.0.0",
+  "description": "Develop a Slack clone using the languages/frameworks of our choice.",
+  "main": "index.js",
+  "scripts": {
+    "installall": "concurrently \"npm i\" \"cd backend && npm i\" \"cd client && npm i\" ",
+    "start": "concurrently \"cd backend && nodemon server\" \"cd client && npm start\"",
+    "test": "concurrently \"cd backend && npm test\" \"cd client && npm test\" "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gpnn/soen341-project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gpnn/soen341-project/issues"
+  },
+  "homepage": "https://github.com/gpnn/soen341-project#readme",
+  "dependencies": {
+    "all": "0.0.0",
+    "concurrently": "^4.1.2",
+    "dotenv": "^8.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.2"
+  }
+}
